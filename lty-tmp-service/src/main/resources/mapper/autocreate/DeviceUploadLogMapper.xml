@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.tmp.service.mapper.DeviceUploadLogMapper">
+  <resultMap id="BaseResultMap" type="com.lty.tmp.service.bean.entity.autocreate.DeviceUploadLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ftp_user" jdbcType="VARCHAR" property="ftpUser" />
+    <result column="dev_id_moved0" jdbcType="VARCHAR" property="devIdMoved0" />
+    <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
+    <result column="ftp_port_moved0" jdbcType="VARCHAR" property="ftpPortMoved0" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="ftp_path" jdbcType="VARCHAR" property="ftpPath" />
+    <result column="dev_resp_moved0" jdbcType="VARCHAR" property="devRespMoved0" />
+    <result column="ftp_ip" jdbcType="VARCHAR" property="ftpIp" />
+    <result column="line_id_moved0" jdbcType="VARCHAR" property="lineIdMoved0" />
+    <result column="ftp_password" jdbcType="VARCHAR" property="ftpPassword" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="dev_sn" jdbcType="VARCHAR" property="devSn" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="log_type_moved0" jdbcType="VARCHAR" property="logTypeMoved0" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="dev_resp" jdbcType="INTEGER" property="devResp" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="ftp_port" jdbcType="INTEGER" property="ftpPort" />
+    <result column="log_type" jdbcType="INTEGER" property="logType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, ftp_user, dev_id_moved0, company_code, ftp_port_moved0, create_uid, ftp_path, 
+    dev_resp_moved0, ftp_ip, line_id_moved0, ftp_password, write_date, dev_sn, create_date, 
+    write_uid, log_type_moved0, city_code, dev_id, dev_resp, line_id, ftp_port, log_type
+  </sql>
+  <select id="selectByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceUploadLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tmp_device_log_upload
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tmp_device_log_upload
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tmp_device_log_upload
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceUploadLogExample">
+    delete from tmp_device_log_upload
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceUploadLog">
+    insert into tmp_device_log_upload (id, ftp_user, dev_id_moved0, 
+      company_code, ftp_port_moved0, create_uid, 
+      ftp_path, dev_resp_moved0, ftp_ip, 
+      line_id_moved0, ftp_password, write_date, 
+      dev_sn, create_date, write_uid, 
+      log_type_moved0, city_code, dev_id, 
+      dev_resp, line_id, ftp_port, 
+      log_type)
+    values (#{id,jdbcType=INTEGER}, #{ftpUser,jdbcType=VARCHAR}, #{devIdMoved0,jdbcType=VARCHAR}, 
+      #{companyCode,jdbcType=VARCHAR}, #{ftpPortMoved0,jdbcType=VARCHAR}, #{createUid,jdbcType=INTEGER}, 
+      #{ftpPath,jdbcType=VARCHAR}, #{devRespMoved0,jdbcType=VARCHAR}, #{ftpIp,jdbcType=VARCHAR}, 
+      #{lineIdMoved0,jdbcType=VARCHAR}, #{ftpPassword,jdbcType=VARCHAR}, #{writeDate,jdbcType=TIMESTAMP}, 
+      #{devSn,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{writeUid,jdbcType=INTEGER}, 
+      #{logTypeMoved0,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{devId,jdbcType=INTEGER}, 
+      #{devResp,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{ftpPort,jdbcType=INTEGER}, 
+      #{logType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceUploadLog">
+    insert into tmp_device_log_upload
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ftpUser != null">
+        ftp_user,
+      </if>
+      <if test="devIdMoved0 != null">
+        dev_id_moved0,
+      </if>
+      <if test="companyCode != null">
+        company_code,
+      </if>
+      <if test="ftpPortMoved0 != null">
+        ftp_port_moved0,
+      </if>
+      <if test="createUid != null">
+        create_uid,
+      </if>
+      <if test="ftpPath != null">
+        ftp_path,
+      </if>
+      <if test="devRespMoved0 != null">
+        dev_resp_moved0,
+      </if>
+      <if test="ftpIp != null">
+        ftp_ip,
+      </if>
+      <if test="lineIdMoved0 != null">
+        line_id_moved0,
+      </if>
+      <if test="ftpPassword != null">
+        ftp_password,
+      </if>
+      <if test="writeDate != null">
+        write_date,
+      </if>
+      <if test="devSn != null">
+        dev_sn,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="writeUid != null">
+        write_uid,
+      </if>
+      <if test="logTypeMoved0 != null">
+        log_type_moved0,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="devResp != null">
+        dev_resp,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="ftpPort != null">
+        ftp_port,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ftpUser != null">
+        #{ftpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="devIdMoved0 != null">
+        #{devIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpPortMoved0 != null">
+        #{ftpPortMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="createUid != null">
+        #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="ftpPath != null">
+        #{ftpPath,jdbcType=VARCHAR},
+      </if>
+      <if test="devRespMoved0 != null">
+        #{devRespMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpIp != null">
+        #{ftpIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lineIdMoved0 != null">
+        #{lineIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpPassword != null">
+        #{ftpPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="writeDate != null">
+        #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devSn != null">
+        #{devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeUid != null">
+        #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="logTypeMoved0 != null">
+        #{logTypeMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="devId != null">
+        #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="devResp != null">
+        #{devResp,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="ftpPort != null">
+        #{ftpPort,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceUploadLogExample" resultType="java.lang.Long">
+    select count(*) from tmp_device_log_upload
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tmp_device_log_upload
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftpUser != null">
+        ftp_user = #{record.ftpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devIdMoved0 != null">
+        dev_id_moved0 = #{record.devIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyCode != null">
+        company_code = #{record.companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftpPortMoved0 != null">
+        ftp_port_moved0 = #{record.ftpPortMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUid != null">
+        create_uid = #{record.createUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftpPath != null">
+        ftp_path = #{record.ftpPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devRespMoved0 != null">
+        dev_resp_moved0 = #{record.devRespMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftpIp != null">
+        ftp_ip = #{record.ftpIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineIdMoved0 != null">
+        line_id_moved0 = #{record.lineIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftpPassword != null">
+        ftp_password = #{record.ftpPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeDate != null">
+        write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.devSn != null">
+        dev_sn = #{record.devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.writeUid != null">
+        write_uid = #{record.writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.logTypeMoved0 != null">
+        log_type_moved0 = #{record.logTypeMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        city_code = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devId != null">
+        dev_id = #{record.devId,jdbcType=INTEGER},
+      </if>
+      <if test="record.devResp != null">
+        dev_resp = #{record.devResp,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftpPort != null">
+        ftp_port = #{record.ftpPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.logType != null">
+        log_type = #{record.logType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tmp_device_log_upload
+    set id = #{record.id,jdbcType=INTEGER},
+      ftp_user = #{record.ftpUser,jdbcType=VARCHAR},
+      dev_id_moved0 = #{record.devIdMoved0,jdbcType=VARCHAR},
+      company_code = #{record.companyCode,jdbcType=VARCHAR},
+      ftp_port_moved0 = #{record.ftpPortMoved0,jdbcType=VARCHAR},
+      create_uid = #{record.createUid,jdbcType=INTEGER},
+      ftp_path = #{record.ftpPath,jdbcType=VARCHAR},
+      dev_resp_moved0 = #{record.devRespMoved0,jdbcType=VARCHAR},
+      ftp_ip = #{record.ftpIp,jdbcType=VARCHAR},
+      line_id_moved0 = #{record.lineIdMoved0,jdbcType=VARCHAR},
+      ftp_password = #{record.ftpPassword,jdbcType=VARCHAR},
+      write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      dev_sn = #{record.devSn,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      write_uid = #{record.writeUid,jdbcType=INTEGER},
+      log_type_moved0 = #{record.logTypeMoved0,jdbcType=VARCHAR},
+      city_code = #{record.cityCode,jdbcType=VARCHAR},
+      dev_id = #{record.devId,jdbcType=INTEGER},
+      dev_resp = #{record.devResp,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      ftp_port = #{record.ftpPort,jdbcType=INTEGER},
+      log_type = #{record.logType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceUploadLog">
+    update tmp_device_log_upload
+    <set>
+      <if test="ftpUser != null">
+        ftp_user = #{ftpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="devIdMoved0 != null">
+        dev_id_moved0 = #{devIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpPortMoved0 != null">
+        ftp_port_moved0 = #{ftpPortMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="createUid != null">
+        create_uid = #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="ftpPath != null">
+        ftp_path = #{ftpPath,jdbcType=VARCHAR},
+      </if>
+      <if test="devRespMoved0 != null">
+        dev_resp_moved0 = #{devRespMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpIp != null">
+        ftp_ip = #{ftpIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lineIdMoved0 != null">
+        line_id_moved0 = #{lineIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpPassword != null">
+        ftp_password = #{ftpPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="writeDate != null">
+        write_date = #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devSn != null">
+        dev_sn = #{devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeUid != null">
+        write_uid = #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="logTypeMoved0 != null">
+        log_type_moved0 = #{logTypeMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="devId != null">
+        dev_id = #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="devResp != null">
+        dev_resp = #{devResp,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="ftpPort != null">
+        ftp_port = #{ftpPort,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null">
+        log_type = #{logType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceUploadLog">
+    update tmp_device_log_upload
+    set ftp_user = #{ftpUser,jdbcType=VARCHAR},
+      dev_id_moved0 = #{devIdMoved0,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      ftp_port_moved0 = #{ftpPortMoved0,jdbcType=VARCHAR},
+      create_uid = #{createUid,jdbcType=INTEGER},
+      ftp_path = #{ftpPath,jdbcType=VARCHAR},
+      dev_resp_moved0 = #{devRespMoved0,jdbcType=VARCHAR},
+      ftp_ip = #{ftpIp,jdbcType=VARCHAR},
+      line_id_moved0 = #{lineIdMoved0,jdbcType=VARCHAR},
+      ftp_password = #{ftpPassword,jdbcType=VARCHAR},
+      write_date = #{writeDate,jdbcType=TIMESTAMP},
+      dev_sn = #{devSn,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      write_uid = #{writeUid,jdbcType=INTEGER},
+      log_type_moved0 = #{logTypeMoved0,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      dev_id = #{devId,jdbcType=INTEGER},
+      dev_resp = #{devResp,jdbcType=INTEGER},
+      line_id = #{lineId,jdbcType=INTEGER},
+      ftp_port = #{ftpPort,jdbcType=INTEGER},
+      log_type = #{logType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

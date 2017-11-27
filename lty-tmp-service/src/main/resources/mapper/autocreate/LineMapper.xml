@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.tmp.service.mapper.LineMapper">
+  <resultMap id="BaseResultMap" type="com.lty.tmp.service.bean.entity.autocreate.Line">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="station_yard_configuration_selected" jdbcType="BIT" property="stationYardConfigurationSelected" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="card_type_configuration_selected" jdbcType="BIT" property="cardTypeConfigurationSelected" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="line_attr" jdbcType="VARCHAR" property="lineAttr" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="uplink_speed_limit" jdbcType="INTEGER" property="uplinkSpeedLimit" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="non_service_speed_limit" jdbcType="INTEGER" property="nonServiceSpeedLimit" />
+    <result column="lang_english" jdbcType="VARCHAR" property="langEnglish" />
+    <result column="lang_mandarin" jdbcType="VARCHAR" property="langMandarin" />
+    <result column="line_code" jdbcType="INTEGER" property="lineCode" />
+    <result column="general_configuration_selected" jdbcType="BIT" property="generalConfigurationSelected" />
+    <result column="downlink_speed_limit" jdbcType="INTEGER" property="downlinkSpeedLimit" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="lang_dialect" jdbcType="VARCHAR" property="langDialect" />
+    <result column="preset_event_selected" jdbcType="BIT" property="presetEventSelected" />
+    <result column="line_properties_selected" jdbcType="BIT" property="linePropertiesSelected" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, station_yard_configuration_selected, city_id, card_type_configuration_selected, 
+    write_uid, line_attr, create_date, create_uid, uplink_speed_limit, company_id, non_service_speed_limit, 
+    lang_english, lang_mandarin, line_code, general_configuration_selected, downlink_speed_limit, 
+    write_date, name, lang_dialect, preset_event_selected, line_properties_selected
+  </sql>
+  <select id="selectByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tmp_line
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tmp_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tmp_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineExample">
+    delete from tmp_line
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lty.tmp.service.bean.entity.autocreate.Line">
+    insert into tmp_line (id, station_yard_configuration_selected, 
+      city_id, card_type_configuration_selected, write_uid, 
+      line_attr, create_date, create_uid, 
+      uplink_speed_limit, company_id, non_service_speed_limit, 
+      lang_english, lang_mandarin, line_code, 
+      general_configuration_selected, downlink_speed_limit, 
+      write_date, name, lang_dialect, 
+      preset_event_selected, line_properties_selected)
+    values (#{id,jdbcType=INTEGER}, #{stationYardConfigurationSelected,jdbcType=BIT}, 
+      #{cityId,jdbcType=INTEGER}, #{cardTypeConfigurationSelected,jdbcType=BIT}, #{writeUid,jdbcType=INTEGER}, 
+      #{lineAttr,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUid,jdbcType=INTEGER}, 
+      #{uplinkSpeedLimit,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{nonServiceSpeedLimit,jdbcType=INTEGER}, 
+      #{langEnglish,jdbcType=VARCHAR}, #{langMandarin,jdbcType=VARCHAR}, #{lineCode,jdbcType=INTEGER}, 
+      #{generalConfigurationSelected,jdbcType=BIT}, #{downlinkSpeedLimit,jdbcType=INTEGER}, 
+      #{writeDate,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{langDialect,jdbcType=VARCHAR}, 
+      #{presetEventSelected,jdbcType=BIT}, #{linePropertiesSelected,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.Line">
+    insert into tmp_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stationYardConfigurationSelected != null">
+        station_yard_configuration_selected,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="cardTypeConfigurationSelected != null">
+        card_type_configuration_selected,
+      </if>
+      <if test="writeUid != null">
+        write_uid,
+      </if>
+      <if test="lineAttr != null">
+        line_attr,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createUid != null">
+        create_uid,
+      </if>
+      <if test="uplinkSpeedLimit != null">
+        uplink_speed_limit,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="nonServiceSpeedLimit != null">
+        non_service_speed_limit,
+      </if>
+      <if test="langEnglish != null">
+        lang_english,
+      </if>
+      <if test="langMandarin != null">
+        lang_mandarin,
+      </if>
+      <if test="lineCode != null">
+        line_code,
+      </if>
+      <if test="generalConfigurationSelected != null">
+        general_configuration_selected,
+      </if>
+      <if test="downlinkSpeedLimit != null">
+        downlink_speed_limit,
+      </if>
+      <if test="writeDate != null">
+        write_date,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="langDialect != null">
+        lang_dialect,
+      </if>
+      <if test="presetEventSelected != null">
+        preset_event_selected,
+      </if>
+      <if test="linePropertiesSelected != null">
+        line_properties_selected,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stationYardConfigurationSelected != null">
+        #{stationYardConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="cardTypeConfigurationSelected != null">
+        #{cardTypeConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="writeUid != null">
+        #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="lineAttr != null">
+        #{lineAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUid != null">
+        #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="uplinkSpeedLimit != null">
+        #{uplinkSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="nonServiceSpeedLimit != null">
+        #{nonServiceSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="langEnglish != null">
+        #{langEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="langMandarin != null">
+        #{langMandarin,jdbcType=VARCHAR},
+      </if>
+      <if test="lineCode != null">
+        #{lineCode,jdbcType=INTEGER},
+      </if>
+      <if test="generalConfigurationSelected != null">
+        #{generalConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="downlinkSpeedLimit != null">
+        #{downlinkSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="writeDate != null">
+        #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="langDialect != null">
+        #{langDialect,jdbcType=VARCHAR},
+      </if>
+      <if test="presetEventSelected != null">
+        #{presetEventSelected,jdbcType=BIT},
+      </if>
+      <if test="linePropertiesSelected != null">
+        #{linePropertiesSelected,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineExample" resultType="java.lang.Long">
+    select count(*) from tmp_line
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tmp_line
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationYardConfigurationSelected != null">
+        station_yard_configuration_selected = #{record.stationYardConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardTypeConfigurationSelected != null">
+        card_type_configuration_selected = #{record.cardTypeConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="record.writeUid != null">
+        write_uid = #{record.writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineAttr != null">
+        line_attr = #{record.lineAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUid != null">
+        create_uid = #{record.createUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uplinkSpeedLimit != null">
+        uplink_speed_limit = #{record.uplinkSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nonServiceSpeedLimit != null">
+        non_service_speed_limit = #{record.nonServiceSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.langEnglish != null">
+        lang_english = #{record.langEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.langMandarin != null">
+        lang_mandarin = #{record.langMandarin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineCode != null">
+        line_code = #{record.lineCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.generalConfigurationSelected != null">
+        general_configuration_selected = #{record.generalConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="record.downlinkSpeedLimit != null">
+        downlink_speed_limit = #{record.downlinkSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.writeDate != null">
+        write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.langDialect != null">
+        lang_dialect = #{record.langDialect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.presetEventSelected != null">
+        preset_event_selected = #{record.presetEventSelected,jdbcType=BIT},
+      </if>
+      <if test="record.linePropertiesSelected != null">
+        line_properties_selected = #{record.linePropertiesSelected,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tmp_line
+    set id = #{record.id,jdbcType=INTEGER},
+      station_yard_configuration_selected = #{record.stationYardConfigurationSelected,jdbcType=BIT},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      card_type_configuration_selected = #{record.cardTypeConfigurationSelected,jdbcType=BIT},
+      write_uid = #{record.writeUid,jdbcType=INTEGER},
+      line_attr = #{record.lineAttr,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      create_uid = #{record.createUid,jdbcType=INTEGER},
+      uplink_speed_limit = #{record.uplinkSpeedLimit,jdbcType=INTEGER},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      non_service_speed_limit = #{record.nonServiceSpeedLimit,jdbcType=INTEGER},
+      lang_english = #{record.langEnglish,jdbcType=VARCHAR},
+      lang_mandarin = #{record.langMandarin,jdbcType=VARCHAR},
+      line_code = #{record.lineCode,jdbcType=INTEGER},
+      general_configuration_selected = #{record.generalConfigurationSelected,jdbcType=BIT},
+      downlink_speed_limit = #{record.downlinkSpeedLimit,jdbcType=INTEGER},
+      write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      name = #{record.name,jdbcType=VARCHAR},
+      lang_dialect = #{record.langDialect,jdbcType=VARCHAR},
+      preset_event_selected = #{record.presetEventSelected,jdbcType=BIT},
+      line_properties_selected = #{record.linePropertiesSelected,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.Line">
+    update tmp_line
+    <set>
+      <if test="stationYardConfigurationSelected != null">
+        station_yard_configuration_selected = #{stationYardConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="cardTypeConfigurationSelected != null">
+        card_type_configuration_selected = #{cardTypeConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="writeUid != null">
+        write_uid = #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="lineAttr != null">
+        line_attr = #{lineAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUid != null">
+        create_uid = #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="uplinkSpeedLimit != null">
+        uplink_speed_limit = #{uplinkSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="nonServiceSpeedLimit != null">
+        non_service_speed_limit = #{nonServiceSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="langEnglish != null">
+        lang_english = #{langEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="langMandarin != null">
+        lang_mandarin = #{langMandarin,jdbcType=VARCHAR},
+      </if>
+      <if test="lineCode != null">
+        line_code = #{lineCode,jdbcType=INTEGER},
+      </if>
+      <if test="generalConfigurationSelected != null">
+        general_configuration_selected = #{generalConfigurationSelected,jdbcType=BIT},
+      </if>
+      <if test="downlinkSpeedLimit != null">
+        downlink_speed_limit = #{downlinkSpeedLimit,jdbcType=INTEGER},
+      </if>
+      <if test="writeDate != null">
+        write_date = #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="langDialect != null">
+        lang_dialect = #{langDialect,jdbcType=VARCHAR},
+      </if>
+      <if test="presetEventSelected != null">
+        preset_event_selected = #{presetEventSelected,jdbcType=BIT},
+      </if>
+      <if test="linePropertiesSelected != null">
+        line_properties_selected = #{linePropertiesSelected,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lty.tmp.service.bean.entity.autocreate.Line">
+    update tmp_line
+    set station_yard_configuration_selected = #{stationYardConfigurationSelected,jdbcType=BIT},
+      city_id = #{cityId,jdbcType=INTEGER},
+      card_type_configuration_selected = #{cardTypeConfigurationSelected,jdbcType=BIT},
+      write_uid = #{writeUid,jdbcType=INTEGER},
+      line_attr = #{lineAttr,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_uid = #{createUid,jdbcType=INTEGER},
+      uplink_speed_limit = #{uplinkSpeedLimit,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      non_service_speed_limit = #{nonServiceSpeedLimit,jdbcType=INTEGER},
+      lang_english = #{langEnglish,jdbcType=VARCHAR},
+      lang_mandarin = #{langMandarin,jdbcType=VARCHAR},
+      line_code = #{lineCode,jdbcType=INTEGER},
+      general_configuration_selected = #{generalConfigurationSelected,jdbcType=BIT},
+      downlink_speed_limit = #{downlinkSpeedLimit,jdbcType=INTEGER},
+      write_date = #{writeDate,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      lang_dialect = #{langDialect,jdbcType=VARCHAR},
+      preset_event_selected = #{presetEventSelected,jdbcType=BIT},
+      line_properties_selected = #{linePropertiesSelected,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

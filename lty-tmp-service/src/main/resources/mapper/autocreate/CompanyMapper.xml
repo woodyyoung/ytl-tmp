@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.tmp.service.mapper.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.lty.tmp.service.bean.entity.autocreate.Company">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="partner_id" jdbcType="INTEGER" property="partnerId" />
+    <result column="currency_id" jdbcType="INTEGER" property="currencyId" />
+    <result column="rml_footer" jdbcType="VARCHAR" property="rmlFooter" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="rml_header" jdbcType="VARCHAR" property="rmlHeader" />
+    <result column="sequence" jdbcType="INTEGER" property="sequence" />
+    <result column="rml_paper_format" jdbcType="VARCHAR" property="rmlPaperFormat" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="font" jdbcType="INTEGER" property="font" />
+    <result column="account_no" jdbcType="VARCHAR" property="accountNo" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="custom_footer" jdbcType="BIT" property="customFooter" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="rml_header2" jdbcType="VARCHAR" property="rmlHeader2" />
+    <result column="rml_header3" jdbcType="VARCHAR" property="rmlHeader3" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="rml_header1" jdbcType="VARCHAR" property="rmlHeader1" />
+    <result column="company_registry" jdbcType="VARCHAR" property="companyRegistry" />
+    <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="tbp_port" jdbcType="INTEGER" property="tbpPort" />
+    <result column="tbp_protocol" jdbcType="VARCHAR" property="tbpProtocol" />
+    <result column="dispatch_send_delay" jdbcType="INTEGER" property="dispatchSendDelay" />
+    <result column="dispatch_ip_address" jdbcType="VARCHAR" property="dispatchIpAddress" />
+    <result column="video_port" jdbcType="INTEGER" property="videoPort" />
+    <result column="video_protocol" jdbcType="VARCHAR" property="videoProtocol" />
+    <result column="dispatch_port" jdbcType="INTEGER" property="dispatchPort" />
+    <result column="dispatch_protocol" jdbcType="VARCHAR" property="dispatchProtocol" />
+    <result column="video_ip_address" jdbcType="VARCHAR" property="videoIpAddress" />
+    <result column="tbp_ip_address" jdbcType="VARCHAR" property="tbpIpAddress" />
+    <result column="video_send_delay" jdbcType="INTEGER" property="videoSendDelay" />
+    <result column="tbp_send_delay" jdbcType="INTEGER" property="tbpSendDelay" />
+    <result column="version_id" jdbcType="INTEGER" property="versionId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lty.tmp.service.bean.entity.autocreate.Company">
+    <result column="logo_web" jdbcType="BINARY" property="logoWeb" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, partner_id, currency_id, rml_footer, create_date, rml_header, sequence, 
+    rml_paper_format, write_uid, font, account_no, parent_id, email, create_uid, custom_footer, 
+    phone, rml_header2, rml_header3, write_date, rml_header1, company_registry, company_code, 
+    city_id, tbp_port, tbp_protocol, dispatch_send_delay, dispatch_ip_address, video_port, 
+    video_protocol, dispatch_port, dispatch_protocol, video_ip_address, tbp_ip_address, 
+    video_send_delay, tbp_send_delay, version_id
+  </sql>
+  <sql id="Blob_Column_List">
+    logo_web
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.lty.tmp.service.bean.entity.autocreate.CompanyExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from res_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.CompanyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from res_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from res_company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from res_company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.CompanyExample">
+    delete from res_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lty.tmp.service.bean.entity.autocreate.Company">
+    insert into res_company (id, name, partner_id, 
+      currency_id, rml_footer, create_date, 
+      rml_header, sequence, rml_paper_format, 
+      write_uid, font, account_no, 
+      parent_id, email, create_uid, 
+      custom_footer, phone, rml_header2, 
+      rml_header3, write_date, rml_header1, 
+      company_registry, company_code, city_id, 
+      tbp_port, tbp_protocol, dispatch_send_delay, 
+      dispatch_ip_address, video_port, video_protocol, 
+      dispatch_port, dispatch_protocol, video_ip_address, 
+      tbp_ip_address, video_send_delay, tbp_send_delay, 
+      version_id, logo_web)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{partnerId,jdbcType=INTEGER}, 
+      #{currencyId,jdbcType=INTEGER}, #{rmlFooter,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{rmlHeader,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{rmlPaperFormat,jdbcType=VARCHAR}, 
+      #{writeUid,jdbcType=INTEGER}, #{font,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{createUid,jdbcType=INTEGER}, 
+      #{customFooter,jdbcType=BIT}, #{phone,jdbcType=VARCHAR}, #{rmlHeader2,jdbcType=VARCHAR}, 
+      #{rmlHeader3,jdbcType=VARCHAR}, #{writeDate,jdbcType=TIMESTAMP}, #{rmlHeader1,jdbcType=VARCHAR}, 
+      #{companyRegistry,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, 
+      #{tbpPort,jdbcType=INTEGER}, #{tbpProtocol,jdbcType=VARCHAR}, #{dispatchSendDelay,jdbcType=INTEGER}, 
+      #{dispatchIpAddress,jdbcType=VARCHAR}, #{videoPort,jdbcType=INTEGER}, #{videoProtocol,jdbcType=VARCHAR}, 
+      #{dispatchPort,jdbcType=INTEGER}, #{dispatchProtocol,jdbcType=VARCHAR}, #{videoIpAddress,jdbcType=VARCHAR}, 
+      #{tbpIpAddress,jdbcType=VARCHAR}, #{videoSendDelay,jdbcType=INTEGER}, #{tbpSendDelay,jdbcType=INTEGER}, 
+      #{versionId,jdbcType=INTEGER}, #{logoWeb,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.Company">
+    insert into res_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="partnerId != null">
+        partner_id,
+      </if>
+      <if test="currencyId != null">
+        currency_id,
+      </if>
+      <if test="rmlFooter != null">
+        rml_footer,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="rmlHeader != null">
+        rml_header,
+      </if>
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="rmlPaperFormat != null">
+        rml_paper_format,
+      </if>
+      <if test="writeUid != null">
+        write_uid,
+      </if>
+      <if test="font != null">
+        font,
+      </if>
+      <if test="accountNo != null">
+        account_no,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="createUid != null">
+        create_uid,
+      </if>
+      <if test="customFooter != null">
+        custom_footer,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="rmlHeader2 != null">
+        rml_header2,
+      </if>
+      <if test="rmlHeader3 != null">
+        rml_header3,
+      </if>
+      <if test="writeDate != null">
+        write_date,
+      </if>
+      <if test="rmlHeader1 != null">
+        rml_header1,
+      </if>
+      <if test="companyRegistry != null">
+        company_registry,
+      </if>
+      <if test="companyCode != null">
+        company_code,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="tbpPort != null">
+        tbp_port,
+      </if>
+      <if test="tbpProtocol != null">
+        tbp_protocol,
+      </if>
+      <if test="dispatchSendDelay != null">
+        dispatch_send_delay,
+      </if>
+      <if test="dispatchIpAddress != null">
+        dispatch_ip_address,
+      </if>
+      <if test="videoPort != null">
+        video_port,
+      </if>
+      <if test="videoProtocol != null">
+        video_protocol,
+      </if>
+      <if test="dispatchPort != null">
+        dispatch_port,
+      </if>
+      <if test="dispatchProtocol != null">
+        dispatch_protocol,
+      </if>
+      <if test="videoIpAddress != null">
+        video_ip_address,
+      </if>
+      <if test="tbpIpAddress != null">
+        tbp_ip_address,
+      </if>
+      <if test="videoSendDelay != null">
+        video_send_delay,
+      </if>
+      <if test="tbpSendDelay != null">
+        tbp_send_delay,
+      </if>
+      <if test="versionId != null">
+        version_id,
+      </if>
+      <if test="logoWeb != null">
+        logo_web,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null">
+        #{partnerId,jdbcType=INTEGER},
+      </if>
+      <if test="currencyId != null">
+        #{currencyId,jdbcType=INTEGER},
+      </if>
+      <if test="rmlFooter != null">
+        #{rmlFooter,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rmlHeader != null">
+        #{rmlHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null">
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="rmlPaperFormat != null">
+        #{rmlPaperFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="writeUid != null">
+        #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="font != null">
+        #{font,jdbcType=INTEGER},
+      </if>
+      <if test="accountNo != null">
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createUid != null">
+        #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="customFooter != null">
+        #{customFooter,jdbcType=BIT},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="rmlHeader2 != null">
+        #{rmlHeader2,jdbcType=VARCHAR},
+      </if>
+      <if test="rmlHeader3 != null">
+        #{rmlHeader3,jdbcType=VARCHAR},
+      </if>
+      <if test="writeDate != null">
+        #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rmlHeader1 != null">
+        #{rmlHeader1,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRegistry != null">
+        #{companyRegistry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="tbpPort != null">
+        #{tbpPort,jdbcType=INTEGER},
+      </if>
+      <if test="tbpProtocol != null">
+        #{tbpProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchSendDelay != null">
+        #{dispatchSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchIpAddress != null">
+        #{dispatchIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPort != null">
+        #{videoPort,jdbcType=INTEGER},
+      </if>
+      <if test="videoProtocol != null">
+        #{videoProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchPort != null">
+        #{dispatchPort,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchProtocol != null">
+        #{dispatchProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="videoIpAddress != null">
+        #{videoIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpIpAddress != null">
+        #{tbpIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSendDelay != null">
+        #{videoSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="tbpSendDelay != null">
+        #{tbpSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="versionId != null">
+        #{versionId,jdbcType=INTEGER},
+      </if>
+      <if test="logoWeb != null">
+        #{logoWeb,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.CompanyExample" resultType="java.lang.Long">
+    select count(*) from res_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update res_company
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerId != null">
+        partner_id = #{record.partnerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.currencyId != null">
+        currency_id = #{record.currencyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rmlFooter != null">
+        rml_footer = #{record.rmlFooter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rmlHeader != null">
+        rml_header = #{record.rmlHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequence != null">
+        sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.rmlPaperFormat != null">
+        rml_paper_format = #{record.rmlPaperFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeUid != null">
+        write_uid = #{record.writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.font != null">
+        font = #{record.font,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountNo != null">
+        account_no = #{record.accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUid != null">
+        create_uid = #{record.createUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.customFooter != null">
+        custom_footer = #{record.customFooter,jdbcType=BIT},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rmlHeader2 != null">
+        rml_header2 = #{record.rmlHeader2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rmlHeader3 != null">
+        rml_header3 = #{record.rmlHeader3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeDate != null">
+        write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rmlHeader1 != null">
+        rml_header1 = #{record.rmlHeader1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyRegistry != null">
+        company_registry = #{record.companyRegistry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyCode != null">
+        company_code = #{record.companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbpPort != null">
+        tbp_port = #{record.tbpPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbpProtocol != null">
+        tbp_protocol = #{record.tbpProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispatchSendDelay != null">
+        dispatch_send_delay = #{record.dispatchSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="record.dispatchIpAddress != null">
+        dispatch_ip_address = #{record.dispatchIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoPort != null">
+        video_port = #{record.videoPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoProtocol != null">
+        video_protocol = #{record.videoProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispatchPort != null">
+        dispatch_port = #{record.dispatchPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.dispatchProtocol != null">
+        dispatch_protocol = #{record.dispatchProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoIpAddress != null">
+        video_ip_address = #{record.videoIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpIpAddress != null">
+        tbp_ip_address = #{record.tbpIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoSendDelay != null">
+        video_send_delay = #{record.videoSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbpSendDelay != null">
+        tbp_send_delay = #{record.tbpSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="record.versionId != null">
+        version_id = #{record.versionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.logoWeb != null">
+        logo_web = #{record.logoWeb,jdbcType=BINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update res_company
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      partner_id = #{record.partnerId,jdbcType=INTEGER},
+      currency_id = #{record.currencyId,jdbcType=INTEGER},
+      rml_footer = #{record.rmlFooter,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      rml_header = #{record.rmlHeader,jdbcType=VARCHAR},
+      sequence = #{record.sequence,jdbcType=INTEGER},
+      rml_paper_format = #{record.rmlPaperFormat,jdbcType=VARCHAR},
+      write_uid = #{record.writeUid,jdbcType=INTEGER},
+      font = #{record.font,jdbcType=INTEGER},
+      account_no = #{record.accountNo,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      create_uid = #{record.createUid,jdbcType=INTEGER},
+      custom_footer = #{record.customFooter,jdbcType=BIT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      rml_header2 = #{record.rmlHeader2,jdbcType=VARCHAR},
+      rml_header3 = #{record.rmlHeader3,jdbcType=VARCHAR},
+      write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      rml_header1 = #{record.rmlHeader1,jdbcType=VARCHAR},
+      company_registry = #{record.companyRegistry,jdbcType=VARCHAR},
+      company_code = #{record.companyCode,jdbcType=VARCHAR},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      tbp_port = #{record.tbpPort,jdbcType=INTEGER},
+      tbp_protocol = #{record.tbpProtocol,jdbcType=VARCHAR},
+      dispatch_send_delay = #{record.dispatchSendDelay,jdbcType=INTEGER},
+      dispatch_ip_address = #{record.dispatchIpAddress,jdbcType=VARCHAR},
+      video_port = #{record.videoPort,jdbcType=INTEGER},
+      video_protocol = #{record.videoProtocol,jdbcType=VARCHAR},
+      dispatch_port = #{record.dispatchPort,jdbcType=INTEGER},
+      dispatch_protocol = #{record.dispatchProtocol,jdbcType=VARCHAR},
+      video_ip_address = #{record.videoIpAddress,jdbcType=VARCHAR},
+      tbp_ip_address = #{record.tbpIpAddress,jdbcType=VARCHAR},
+      video_send_delay = #{record.videoSendDelay,jdbcType=INTEGER},
+      tbp_send_delay = #{record.tbpSendDelay,jdbcType=INTEGER},
+      version_id = #{record.versionId,jdbcType=INTEGER},
+      logo_web = #{record.logoWeb,jdbcType=BINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update res_company
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      partner_id = #{record.partnerId,jdbcType=INTEGER},
+      currency_id = #{record.currencyId,jdbcType=INTEGER},
+      rml_footer = #{record.rmlFooter,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      rml_header = #{record.rmlHeader,jdbcType=VARCHAR},
+      sequence = #{record.sequence,jdbcType=INTEGER},
+      rml_paper_format = #{record.rmlPaperFormat,jdbcType=VARCHAR},
+      write_uid = #{record.writeUid,jdbcType=INTEGER},
+      font = #{record.font,jdbcType=INTEGER},
+      account_no = #{record.accountNo,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      create_uid = #{record.createUid,jdbcType=INTEGER},
+      custom_footer = #{record.customFooter,jdbcType=BIT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      rml_header2 = #{record.rmlHeader2,jdbcType=VARCHAR},
+      rml_header3 = #{record.rmlHeader3,jdbcType=VARCHAR},
+      write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      rml_header1 = #{record.rmlHeader1,jdbcType=VARCHAR},
+      company_registry = #{record.companyRegistry,jdbcType=VARCHAR},
+      company_code = #{record.companyCode,jdbcType=VARCHAR},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      tbp_port = #{record.tbpPort,jdbcType=INTEGER},
+      tbp_protocol = #{record.tbpProtocol,jdbcType=VARCHAR},
+      dispatch_send_delay = #{record.dispatchSendDelay,jdbcType=INTEGER},
+      dispatch_ip_address = #{record.dispatchIpAddress,jdbcType=VARCHAR},
+      video_port = #{record.videoPort,jdbcType=INTEGER},
+      video_protocol = #{record.videoProtocol,jdbcType=VARCHAR},
+      dispatch_port = #{record.dispatchPort,jdbcType=INTEGER},
+      dispatch_protocol = #{record.dispatchProtocol,jdbcType=VARCHAR},
+      video_ip_address = #{record.videoIpAddress,jdbcType=VARCHAR},
+      tbp_ip_address = #{record.tbpIpAddress,jdbcType=VARCHAR},
+      video_send_delay = #{record.videoSendDelay,jdbcType=INTEGER},
+      tbp_send_delay = #{record.tbpSendDelay,jdbcType=INTEGER},
+      version_id = #{record.versionId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.Company">
+    update res_company
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null">
+        partner_id = #{partnerId,jdbcType=INTEGER},
+      </if>
+      <if test="currencyId != null">
+        currency_id = #{currencyId,jdbcType=INTEGER},
+      </if>
+      <if test="rmlFooter != null">
+        rml_footer = #{rmlFooter,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rmlHeader != null">
+        rml_header = #{rmlHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null">
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="rmlPaperFormat != null">
+        rml_paper_format = #{rmlPaperFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="writeUid != null">
+        write_uid = #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="font != null">
+        font = #{font,jdbcType=INTEGER},
+      </if>
+      <if test="accountNo != null">
+        account_no = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createUid != null">
+        create_uid = #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="customFooter != null">
+        custom_footer = #{customFooter,jdbcType=BIT},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="rmlHeader2 != null">
+        rml_header2 = #{rmlHeader2,jdbcType=VARCHAR},
+      </if>
+      <if test="rmlHeader3 != null">
+        rml_header3 = #{rmlHeader3,jdbcType=VARCHAR},
+      </if>
+      <if test="writeDate != null">
+        write_date = #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rmlHeader1 != null">
+        rml_header1 = #{rmlHeader1,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRegistry != null">
+        company_registry = #{companyRegistry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="tbpPort != null">
+        tbp_port = #{tbpPort,jdbcType=INTEGER},
+      </if>
+      <if test="tbpProtocol != null">
+        tbp_protocol = #{tbpProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchSendDelay != null">
+        dispatch_send_delay = #{dispatchSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchIpAddress != null">
+        dispatch_ip_address = #{dispatchIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPort != null">
+        video_port = #{videoPort,jdbcType=INTEGER},
+      </if>
+      <if test="videoProtocol != null">
+        video_protocol = #{videoProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchPort != null">
+        dispatch_port = #{dispatchPort,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchProtocol != null">
+        dispatch_protocol = #{dispatchProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="videoIpAddress != null">
+        video_ip_address = #{videoIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpIpAddress != null">
+        tbp_ip_address = #{tbpIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSendDelay != null">
+        video_send_delay = #{videoSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="tbpSendDelay != null">
+        tbp_send_delay = #{tbpSendDelay,jdbcType=INTEGER},
+      </if>
+      <if test="versionId != null">
+        version_id = #{versionId,jdbcType=INTEGER},
+      </if>
+      <if test="logoWeb != null">
+        logo_web = #{logoWeb,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lty.tmp.service.bean.entity.autocreate.Company">
+    update res_company
+    set name = #{name,jdbcType=VARCHAR},
+      partner_id = #{partnerId,jdbcType=INTEGER},
+      currency_id = #{currencyId,jdbcType=INTEGER},
+      rml_footer = #{rmlFooter,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      rml_header = #{rmlHeader,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=INTEGER},
+      rml_paper_format = #{rmlPaperFormat,jdbcType=VARCHAR},
+      write_uid = #{writeUid,jdbcType=INTEGER},
+      font = #{font,jdbcType=INTEGER},
+      account_no = #{accountNo,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      create_uid = #{createUid,jdbcType=INTEGER},
+      custom_footer = #{customFooter,jdbcType=BIT},
+      phone = #{phone,jdbcType=VARCHAR},
+      rml_header2 = #{rmlHeader2,jdbcType=VARCHAR},
+      rml_header3 = #{rmlHeader3,jdbcType=VARCHAR},
+      write_date = #{writeDate,jdbcType=TIMESTAMP},
+      rml_header1 = #{rmlHeader1,jdbcType=VARCHAR},
+      company_registry = #{companyRegistry,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=INTEGER},
+      tbp_port = #{tbpPort,jdbcType=INTEGER},
+      tbp_protocol = #{tbpProtocol,jdbcType=VARCHAR},
+      dispatch_send_delay = #{dispatchSendDelay,jdbcType=INTEGER},
+      dispatch_ip_address = #{dispatchIpAddress,jdbcType=VARCHAR},
+      video_port = #{videoPort,jdbcType=INTEGER},
+      video_protocol = #{videoProtocol,jdbcType=VARCHAR},
+      dispatch_port = #{dispatchPort,jdbcType=INTEGER},
+      dispatch_protocol = #{dispatchProtocol,jdbcType=VARCHAR},
+      video_ip_address = #{videoIpAddress,jdbcType=VARCHAR},
+      tbp_ip_address = #{tbpIpAddress,jdbcType=VARCHAR},
+      video_send_delay = #{videoSendDelay,jdbcType=INTEGER},
+      tbp_send_delay = #{tbpSendDelay,jdbcType=INTEGER},
+      version_id = #{versionId,jdbcType=INTEGER},
+      logo_web = #{logoWeb,jdbcType=BINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lty.tmp.service.bean.entity.autocreate.Company">
+    update res_company
+    set name = #{name,jdbcType=VARCHAR},
+      partner_id = #{partnerId,jdbcType=INTEGER},
+      currency_id = #{currencyId,jdbcType=INTEGER},
+      rml_footer = #{rmlFooter,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      rml_header = #{rmlHeader,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=INTEGER},
+      rml_paper_format = #{rmlPaperFormat,jdbcType=VARCHAR},
+      write_uid = #{writeUid,jdbcType=INTEGER},
+      font = #{font,jdbcType=INTEGER},
+      account_no = #{accountNo,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      create_uid = #{createUid,jdbcType=INTEGER},
+      custom_footer = #{customFooter,jdbcType=BIT},
+      phone = #{phone,jdbcType=VARCHAR},
+      rml_header2 = #{rmlHeader2,jdbcType=VARCHAR},
+      rml_header3 = #{rmlHeader3,jdbcType=VARCHAR},
+      write_date = #{writeDate,jdbcType=TIMESTAMP},
+      rml_header1 = #{rmlHeader1,jdbcType=VARCHAR},
+      company_registry = #{companyRegistry,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=INTEGER},
+      tbp_port = #{tbpPort,jdbcType=INTEGER},
+      tbp_protocol = #{tbpProtocol,jdbcType=VARCHAR},
+      dispatch_send_delay = #{dispatchSendDelay,jdbcType=INTEGER},
+      dispatch_ip_address = #{dispatchIpAddress,jdbcType=VARCHAR},
+      video_port = #{videoPort,jdbcType=INTEGER},
+      video_protocol = #{videoProtocol,jdbcType=VARCHAR},
+      dispatch_port = #{dispatchPort,jdbcType=INTEGER},
+      dispatch_protocol = #{dispatchProtocol,jdbcType=VARCHAR},
+      video_ip_address = #{videoIpAddress,jdbcType=VARCHAR},
+      tbp_ip_address = #{tbpIpAddress,jdbcType=VARCHAR},
+      video_send_delay = #{videoSendDelay,jdbcType=INTEGER},
+      tbp_send_delay = #{tbpSendDelay,jdbcType=INTEGER},
+      version_id = #{versionId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

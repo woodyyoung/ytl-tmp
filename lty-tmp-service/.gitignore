@@ -1,0 +1,7 @@
+/target/
+/.settings/
+.classpath
+.project
+/lty_big_websocket_logs/
+/catalina.base_IS_UNDEFINED/
+.gitgnore

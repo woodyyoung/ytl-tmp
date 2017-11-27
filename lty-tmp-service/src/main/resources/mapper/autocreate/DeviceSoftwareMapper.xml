@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.tmp.service.mapper.DeviceSoftwareMapper">
+  <resultMap id="BaseResultMap" type="com.lty.tmp.service.bean.entity.autocreate.DeviceSoftware">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="boot_version" jdbcType="VARCHAR" property="bootVersion" />
+    <result column="fs_version" jdbcType="VARCHAR" property="fsVersion" />
+    <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
+    <result column="double_cam_version" jdbcType="VARCHAR" property="doubleCamVersion" />
+    <result column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="mcu_version" jdbcType="VARCHAR" property="mcuVersion" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="camera2_params" jdbcType="VARCHAR" property="camera2Params" />
+    <result column="dev_sn" jdbcType="VARCHAR" property="devSn" />
+    <result column="sr_version" jdbcType="VARCHAR" property="srVersion" />
+    <result column="media_version" jdbcType="VARCHAR" property="mediaVersion" />
+    <result column="black_list" jdbcType="VARCHAR" property="blackList" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="communication_version" jdbcType="VARCHAR" property="communicationVersion" />
+    <result column="app_version" jdbcType="VARCHAR" property="appVersion" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="default_events" jdbcType="VARCHAR" property="defaultEvents" />
+    <result column="station_config" jdbcType="VARCHAR" property="stationConfig" />
+    <result column="line_attributes" jdbcType="VARCHAR" property="lineAttributes" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="gps_version" jdbcType="VARCHAR" property="gpsVersion" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="common_config" jdbcType="VARCHAR" property="commonConfig" />
+    <result column="kernel_version" jdbcType="VARCHAR" property="kernelVersion" />
+    <result column="fare_config" jdbcType="VARCHAR" property="fareConfig" />
+    <result column="keyboard_version" jdbcType="VARCHAR" property="keyboardVersion" />
+    <result column="camera1_params" jdbcType="VARCHAR" property="camera1Params" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="ic_param_version" jdbcType="VARCHAR" property="icParamVersion" />
+    <result column="cardtype_config" jdbcType="VARCHAR" property="cardtypeConfig" />
+    <result column="white_list" jdbcType="VARCHAR" property="whiteList" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, boot_version, fs_version, company_code, double_cam_version, dev_id, mcu_version, 
+    write_uid, camera2_params, dev_sn, sr_version, media_version, black_list, create_uid, 
+    communication_version, app_version, city_code, default_events, station_config, line_attributes, 
+    line_id, gps_version, write_date, common_config, kernel_version, fare_config, keyboard_version, 
+    camera1_params, create_date, ic_param_version, cardtype_config, white_list
+  </sql>
+  <select id="selectByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceSoftwareExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tmp_device_software_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tmp_device_software_status
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tmp_device_software_status
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceSoftwareExample">
+    delete from tmp_device_software_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceSoftware">
+    insert into tmp_device_software_status (id, boot_version, fs_version, 
+      company_code, double_cam_version, dev_id, 
+      mcu_version, write_uid, camera2_params, 
+      dev_sn, sr_version, media_version, 
+      black_list, create_uid, communication_version, 
+      app_version, city_code, default_events, 
+      station_config, line_attributes, line_id, 
+      gps_version, write_date, common_config, 
+      kernel_version, fare_config, keyboard_version, 
+      camera1_params, create_date, ic_param_version, 
+      cardtype_config, white_list)
+    values (#{id,jdbcType=INTEGER}, #{bootVersion,jdbcType=VARCHAR}, #{fsVersion,jdbcType=VARCHAR}, 
+      #{companyCode,jdbcType=VARCHAR}, #{doubleCamVersion,jdbcType=VARCHAR}, #{devId,jdbcType=INTEGER}, 
+      #{mcuVersion,jdbcType=VARCHAR}, #{writeUid,jdbcType=INTEGER}, #{camera2Params,jdbcType=VARCHAR}, 
+      #{devSn,jdbcType=VARCHAR}, #{srVersion,jdbcType=VARCHAR}, #{mediaVersion,jdbcType=VARCHAR}, 
+      #{blackList,jdbcType=VARCHAR}, #{createUid,jdbcType=INTEGER}, #{communicationVersion,jdbcType=VARCHAR}, 
+      #{appVersion,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{defaultEvents,jdbcType=VARCHAR}, 
+      #{stationConfig,jdbcType=VARCHAR}, #{lineAttributes,jdbcType=VARCHAR}, #{lineId,jdbcType=INTEGER}, 
+      #{gpsVersion,jdbcType=VARCHAR}, #{writeDate,jdbcType=TIMESTAMP}, #{commonConfig,jdbcType=VARCHAR}, 
+      #{kernelVersion,jdbcType=VARCHAR}, #{fareConfig,jdbcType=VARCHAR}, #{keyboardVersion,jdbcType=VARCHAR}, 
+      #{camera1Params,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{icParamVersion,jdbcType=VARCHAR}, 
+      #{cardtypeConfig,jdbcType=VARCHAR}, #{whiteList,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceSoftware">
+    insert into tmp_device_software_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bootVersion != null">
+        boot_version,
+      </if>
+      <if test="fsVersion != null">
+        fs_version,
+      </if>
+      <if test="companyCode != null">
+        company_code,
+      </if>
+      <if test="doubleCamVersion != null">
+        double_cam_version,
+      </if>
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="mcuVersion != null">
+        mcu_version,
+      </if>
+      <if test="writeUid != null">
+        write_uid,
+      </if>
+      <if test="camera2Params != null">
+        camera2_params,
+      </if>
+      <if test="devSn != null">
+        dev_sn,
+      </if>
+      <if test="srVersion != null">
+        sr_version,
+      </if>
+      <if test="mediaVersion != null">
+        media_version,
+      </if>
+      <if test="blackList != null">
+        black_list,
+      </if>
+      <if test="createUid != null">
+        create_uid,
+      </if>
+      <if test="communicationVersion != null">
+        communication_version,
+      </if>
+      <if test="appVersion != null">
+        app_version,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="defaultEvents != null">
+        default_events,
+      </if>
+      <if test="stationConfig != null">
+        station_config,
+      </if>
+      <if test="lineAttributes != null">
+        line_attributes,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="gpsVersion != null">
+        gps_version,
+      </if>
+      <if test="writeDate != null">
+        write_date,
+      </if>
+      <if test="commonConfig != null">
+        common_config,
+      </if>
+      <if test="kernelVersion != null">
+        kernel_version,
+      </if>
+      <if test="fareConfig != null">
+        fare_config,
+      </if>
+      <if test="keyboardVersion != null">
+        keyboard_version,
+      </if>
+      <if test="camera1Params != null">
+        camera1_params,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="icParamVersion != null">
+        ic_param_version,
+      </if>
+      <if test="cardtypeConfig != null">
+        cardtype_config,
+      </if>
+      <if test="whiteList != null">
+        white_list,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bootVersion != null">
+        #{bootVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="fsVersion != null">
+        #{fsVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="doubleCamVersion != null">
+        #{doubleCamVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="devId != null">
+        #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="mcuVersion != null">
+        #{mcuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="writeUid != null">
+        #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="camera2Params != null">
+        #{camera2Params,jdbcType=VARCHAR},
+      </if>
+      <if test="devSn != null">
+        #{devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="srVersion != null">
+        #{srVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaVersion != null">
+        #{mediaVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="blackList != null">
+        #{blackList,jdbcType=VARCHAR},
+      </if>
+      <if test="createUid != null">
+        #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="communicationVersion != null">
+        #{communicationVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null">
+        #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultEvents != null">
+        #{defaultEvents,jdbcType=VARCHAR},
+      </if>
+      <if test="stationConfig != null">
+        #{stationConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="lineAttributes != null">
+        #{lineAttributes,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="gpsVersion != null">
+        #{gpsVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="writeDate != null">
+        #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commonConfig != null">
+        #{commonConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="kernelVersion != null">
+        #{kernelVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="fareConfig != null">
+        #{fareConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="keyboardVersion != null">
+        #{keyboardVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="camera1Params != null">
+        #{camera1Params,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icParamVersion != null">
+        #{icParamVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtypeConfig != null">
+        #{cardtypeConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="whiteList != null">
+        #{whiteList,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceSoftwareExample" resultType="java.lang.Long">
+    select count(*) from tmp_device_software_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tmp_device_software_status
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bootVersion != null">
+        boot_version = #{record.bootVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsVersion != null">
+        fs_version = #{record.fsVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyCode != null">
+        company_code = #{record.companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doubleCamVersion != null">
+        double_cam_version = #{record.doubleCamVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devId != null">
+        dev_id = #{record.devId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mcuVersion != null">
+        mcu_version = #{record.mcuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeUid != null">
+        write_uid = #{record.writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.camera2Params != null">
+        camera2_params = #{record.camera2Params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devSn != null">
+        dev_sn = #{record.devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srVersion != null">
+        sr_version = #{record.srVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediaVersion != null">
+        media_version = #{record.mediaVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blackList != null">
+        black_list = #{record.blackList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUid != null">
+        create_uid = #{record.createUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.communicationVersion != null">
+        communication_version = #{record.communicationVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appVersion != null">
+        app_version = #{record.appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        city_code = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultEvents != null">
+        default_events = #{record.defaultEvents,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationConfig != null">
+        station_config = #{record.stationConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineAttributes != null">
+        line_attributes = #{record.lineAttributes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.gpsVersion != null">
+        gps_version = #{record.gpsVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeDate != null">
+        write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commonConfig != null">
+        common_config = #{record.commonConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kernelVersion != null">
+        kernel_version = #{record.kernelVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fareConfig != null">
+        fare_config = #{record.fareConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyboardVersion != null">
+        keyboard_version = #{record.keyboardVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.camera1Params != null">
+        camera1_params = #{record.camera1Params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.icParamVersion != null">
+        ic_param_version = #{record.icParamVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardtypeConfig != null">
+        cardtype_config = #{record.cardtypeConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.whiteList != null">
+        white_list = #{record.whiteList,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tmp_device_software_status
+    set id = #{record.id,jdbcType=INTEGER},
+      boot_version = #{record.bootVersion,jdbcType=VARCHAR},
+      fs_version = #{record.fsVersion,jdbcType=VARCHAR},
+      company_code = #{record.companyCode,jdbcType=VARCHAR},
+      double_cam_version = #{record.doubleCamVersion,jdbcType=VARCHAR},
+      dev_id = #{record.devId,jdbcType=INTEGER},
+      mcu_version = #{record.mcuVersion,jdbcType=VARCHAR},
+      write_uid = #{record.writeUid,jdbcType=INTEGER},
+      camera2_params = #{record.camera2Params,jdbcType=VARCHAR},
+      dev_sn = #{record.devSn,jdbcType=VARCHAR},
+      sr_version = #{record.srVersion,jdbcType=VARCHAR},
+      media_version = #{record.mediaVersion,jdbcType=VARCHAR},
+      black_list = #{record.blackList,jdbcType=VARCHAR},
+      create_uid = #{record.createUid,jdbcType=INTEGER},
+      communication_version = #{record.communicationVersion,jdbcType=VARCHAR},
+      app_version = #{record.appVersion,jdbcType=VARCHAR},
+      city_code = #{record.cityCode,jdbcType=VARCHAR},
+      default_events = #{record.defaultEvents,jdbcType=VARCHAR},
+      station_config = #{record.stationConfig,jdbcType=VARCHAR},
+      line_attributes = #{record.lineAttributes,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      gps_version = #{record.gpsVersion,jdbcType=VARCHAR},
+      write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      common_config = #{record.commonConfig,jdbcType=VARCHAR},
+      kernel_version = #{record.kernelVersion,jdbcType=VARCHAR},
+      fare_config = #{record.fareConfig,jdbcType=VARCHAR},
+      keyboard_version = #{record.keyboardVersion,jdbcType=VARCHAR},
+      camera1_params = #{record.camera1Params,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      ic_param_version = #{record.icParamVersion,jdbcType=VARCHAR},
+      cardtype_config = #{record.cardtypeConfig,jdbcType=VARCHAR},
+      white_list = #{record.whiteList,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceSoftware">
+    update tmp_device_software_status
+    <set>
+      <if test="bootVersion != null">
+        boot_version = #{bootVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="fsVersion != null">
+        fs_version = #{fsVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="doubleCamVersion != null">
+        double_cam_version = #{doubleCamVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="devId != null">
+        dev_id = #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="mcuVersion != null">
+        mcu_version = #{mcuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="writeUid != null">
+        write_uid = #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="camera2Params != null">
+        camera2_params = #{camera2Params,jdbcType=VARCHAR},
+      </if>
+      <if test="devSn != null">
+        dev_sn = #{devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="srVersion != null">
+        sr_version = #{srVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaVersion != null">
+        media_version = #{mediaVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="blackList != null">
+        black_list = #{blackList,jdbcType=VARCHAR},
+      </if>
+      <if test="createUid != null">
+        create_uid = #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="communicationVersion != null">
+        communication_version = #{communicationVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null">
+        app_version = #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultEvents != null">
+        default_events = #{defaultEvents,jdbcType=VARCHAR},
+      </if>
+      <if test="stationConfig != null">
+        station_config = #{stationConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="lineAttributes != null">
+        line_attributes = #{lineAttributes,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="gpsVersion != null">
+        gps_version = #{gpsVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="writeDate != null">
+        write_date = #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commonConfig != null">
+        common_config = #{commonConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="kernelVersion != null">
+        kernel_version = #{kernelVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="fareConfig != null">
+        fare_config = #{fareConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="keyboardVersion != null">
+        keyboard_version = #{keyboardVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="camera1Params != null">
+        camera1_params = #{camera1Params,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icParamVersion != null">
+        ic_param_version = #{icParamVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtypeConfig != null">
+        cardtype_config = #{cardtypeConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="whiteList != null">
+        white_list = #{whiteList,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceSoftware">
+    update tmp_device_software_status
+    set boot_version = #{bootVersion,jdbcType=VARCHAR},
+      fs_version = #{fsVersion,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      double_cam_version = #{doubleCamVersion,jdbcType=VARCHAR},
+      dev_id = #{devId,jdbcType=INTEGER},
+      mcu_version = #{mcuVersion,jdbcType=VARCHAR},
+      write_uid = #{writeUid,jdbcType=INTEGER},
+      camera2_params = #{camera2Params,jdbcType=VARCHAR},
+      dev_sn = #{devSn,jdbcType=VARCHAR},
+      sr_version = #{srVersion,jdbcType=VARCHAR},
+      media_version = #{mediaVersion,jdbcType=VARCHAR},
+      black_list = #{blackList,jdbcType=VARCHAR},
+      create_uid = #{createUid,jdbcType=INTEGER},
+      communication_version = #{communicationVersion,jdbcType=VARCHAR},
+      app_version = #{appVersion,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      default_events = #{defaultEvents,jdbcType=VARCHAR},
+      station_config = #{stationConfig,jdbcType=VARCHAR},
+      line_attributes = #{lineAttributes,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=INTEGER},
+      gps_version = #{gpsVersion,jdbcType=VARCHAR},
+      write_date = #{writeDate,jdbcType=TIMESTAMP},
+      common_config = #{commonConfig,jdbcType=VARCHAR},
+      kernel_version = #{kernelVersion,jdbcType=VARCHAR},
+      fare_config = #{fareConfig,jdbcType=VARCHAR},
+      keyboard_version = #{keyboardVersion,jdbcType=VARCHAR},
+      camera1_params = #{camera1Params,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      ic_param_version = #{icParamVersion,jdbcType=VARCHAR},
+      cardtype_config = #{cardtypeConfig,jdbcType=VARCHAR},
+      white_list = #{whiteList,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

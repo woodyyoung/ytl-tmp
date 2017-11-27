@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.tmp.service.mapper.DeviceMapper">
+  <resultMap id="BaseResultMap" type="com.lty.tmp.service.bean.entity.autocreate.Device">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="device_no" jdbcType="VARCHAR" property="deviceNo" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="vehicle_no" jdbcType="VARCHAR" property="vehicleNo" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="device_type_id" jdbcType="INTEGER" property="deviceTypeId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="tbp_status" jdbcType="INTEGER" property="tbpStatus" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, create_uid, device_no, city_id, vehicle_no, company_id, line_id, create_date, 
+    write_uid, write_date, device_type_id, device_id, tbp_status, last_login_time
+  </sql>
+  <select id="selectByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tmp_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tmp_device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tmp_device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceExample">
+    delete from tmp_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lty.tmp.service.bean.entity.autocreate.Device">
+    insert into tmp_device (id, create_uid, device_no, 
+      city_id, vehicle_no, company_id, 
+      line_id, create_date, write_uid, 
+      write_date, device_type_id, device_id, 
+      tbp_status, last_login_time)
+    values (#{id,jdbcType=INTEGER}, #{createUid,jdbcType=INTEGER}, #{deviceNo,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=INTEGER}, #{vehicleNo,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}, 
+      #{lineId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{writeUid,jdbcType=INTEGER}, 
+      #{writeDate,jdbcType=TIMESTAMP}, #{deviceTypeId,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, 
+      #{tbpStatus,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.Device">
+    insert into tmp_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createUid != null">
+        create_uid,
+      </if>
+      <if test="deviceNo != null">
+        device_no,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="vehicleNo != null">
+        vehicle_no,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="writeUid != null">
+        write_uid,
+      </if>
+      <if test="writeDate != null">
+        write_date,
+      </if>
+      <if test="deviceTypeId != null">
+        device_type_id,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="tbpStatus != null">
+        tbp_status,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createUid != null">
+        #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="deviceNo != null">
+        #{deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleNo != null">
+        #{vehicleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeUid != null">
+        #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="writeDate != null">
+        #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceTypeId != null">
+        #{deviceTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpStatus != null">
+        #{tbpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.DeviceExample" resultType="java.lang.Long">
+    select count(*) from tmp_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tmp_device
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUid != null">
+        create_uid = #{record.createUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceNo != null">
+        device_no = #{record.deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vehicleNo != null">
+        vehicle_no = #{record.vehicleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.writeUid != null">
+        write_uid = #{record.writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.writeDate != null">
+        write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deviceTypeId != null">
+        device_type_id = #{record.deviceTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceId != null">
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpStatus != null">
+        tbp_status = #{record.tbpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastLoginTime != null">
+        last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tmp_device
+    set id = #{record.id,jdbcType=INTEGER},
+      create_uid = #{record.createUid,jdbcType=INTEGER},
+      device_no = #{record.deviceNo,jdbcType=VARCHAR},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      vehicle_no = #{record.vehicleNo,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      write_uid = #{record.writeUid,jdbcType=INTEGER},
+      write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      device_type_id = #{record.deviceTypeId,jdbcType=INTEGER},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      tbp_status = #{record.tbpStatus,jdbcType=INTEGER},
+      last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.Device">
+    update tmp_device
+    <set>
+      <if test="createUid != null">
+        create_uid = #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="deviceNo != null">
+        device_no = #{deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleNo != null">
+        vehicle_no = #{vehicleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeUid != null">
+        write_uid = #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="writeDate != null">
+        write_date = #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceTypeId != null">
+        device_type_id = #{deviceTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpStatus != null">
+        tbp_status = #{tbpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lty.tmp.service.bean.entity.autocreate.Device">
+    update tmp_device
+    set create_uid = #{createUid,jdbcType=INTEGER},
+      device_no = #{deviceNo,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=INTEGER},
+      vehicle_no = #{vehicleNo,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER},
+      line_id = #{lineId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      write_uid = #{writeUid,jdbcType=INTEGER},
+      write_date = #{writeDate,jdbcType=TIMESTAMP},
+      device_type_id = #{deviceTypeId,jdbcType=INTEGER},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      tbp_status = #{tbpStatus,jdbcType=INTEGER},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

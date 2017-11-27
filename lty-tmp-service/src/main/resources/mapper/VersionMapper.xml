@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.tmp.service.mapper.VersionMapper">
+  <resultMap id="LineVersionResultMap" type="com.lty.tmp.service.bean.entity.autocreate.LineVersion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="xml_type" jdbcType="VARCHAR" property="xmlType" />
+    <result column="sub_version" jdbcType="VARCHAR" property="subVersion" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="main_version" jdbcType="VARCHAR" property="mainVersion" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+  </resultMap>
+  
+  <resultMap id="AdVersionResultMap" type="com.lty.tmp.service.bean.entity.AdVersion">
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="tmp_line_id" jdbcType="INTEGER" property="tmpLineId" />
+    <result column="ad_version" jdbcType="VARCHAR" property="adVersion" />
+    <result column="xml_uri" jdbcType="VARCHAR" property="filePath" />
+  </resultMap>
+  
+   <resultMap id="AppUpgradeVersionResultMap" type="com.lty.tmp.service.bean.entity.AppUpgradeVersion">
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="device_type_id" jdbcType="INTEGER" property="deviceType" />
+    <result column="file_ver" jdbcType="VARCHAR" property="version" />
+    <result column="file_uri" jdbcType="VARCHAR" property="filePath" />
+    
+    <collection property="deviceList" column="id" javaType="ArrayList" 
+            ofType="java.lang.String" select="getDeviceListByUpgradeID"/>
+    
+  </resultMap>
+  
+  
+   <resultMap id="BlacklistVersionResultMap" type="com.lty.tmp.service.bean.entity.autocreate.BlackListVersion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="file_uri" jdbcType="VARCHAR" property="fileUri" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="size" jdbcType="INTEGER" property="size" />
+  </resultMap>
+  
+  
+  <select id="getLineVersion"  parameterType="Map"  resultMap="LineVersionResultMap">
+	     SELECT
+		b.*
+	FROM
+		tmp_line_release_version b
+	WHERE
+		to_number(b.version,'999999999999') = (
+			SELECT
+				MAX (to_number(version,'999999999999'))
+			FROM
+				tmp_line_release_version C
+			WHERE
+				C .company_id = b.company_id
+			AND C .line_id = b.line_id
+			AND C .xml_type = b.xml_type
+		)
+		and b.xml_type = #{xmlType,jdbcType=VARCHAR} 
+  </select>
+  
+  
+  
+  <select id="getAdVersion"  parameterType="Map"  resultMap="AdVersionResultMap">
+			SELECT
+		b.*
+	FROM
+		(
+			SELECT
+				T .city_id,
+				T .company_id,
+				r.tmp_line_id,
+				T .ad_version,
+				T .xml_uri
+			FROM
+				tmp_ad_publish_record T,
+				tmp_ad_publish_record_tmp_line_rel r
+			WHERE
+				(
+					T . ID = r.tmp_ad_publish_record_id
+				)
+		) b
+	WHERE
+		to_number(
+			(
+				split_part(b.ad_version, '.', 2) || split_part(b.ad_version, '.', 3) || split_part(b.ad_version, '.', 4)
+			),
+			'9999999999999999999'
+		) = (
+			SELECT
+				MAX (
+					to_number(
+						(
+							split_part(C .ad_version, '.', 2) || split_part(C .ad_version, '.', 3) || split_part(C .ad_version, '.', 4)
+						),
+						'9999999999999999999'
+					)
+				)
+			FROM
+				(
+					SELECT
+						T .city_id,
+						T .company_id,
+						r.tmp_line_id,
+						T .ad_version,
+						T .xml_uri
+					FROM
+						tmp_ad_publish_record T,
+						tmp_ad_publish_record_tmp_line_rel r
+					WHERE
+						(
+							T . ID = r.tmp_ad_publish_record_id
+						)
+				) C
+			WHERE
+				C .city_id = b.city_id
+			AND C .company_id = b.company_id
+			AND C .tmp_line_id = b.tmp_line_id
+		)
+  </select>
+  
+  
+  <select id="getAppUpgradeVersion"  parameterType="Map"  resultMap="AppUpgradeVersionResultMap">
+				SELECT
+			b.*
+		FROM
+			(
+				SELECT
+					to_number(
+						(
+							LPAD(
+								split_part(T .file_ver, '.', 2),
+								3,
+								'0'
+							) || LPAD(
+								split_part(T .file_ver, '.', 3),
+								3,
+								'0'
+							) || LPAD(
+								split_part(T .file_ver, '.', 4),
+								5,
+								'0'
+							)
+						),
+						'9999999999999999999'
+					) versions,
+					T .*
+				FROM
+					tmp_device_upgrade_file T
+				WHERE
+					split_part(T .file_ver, '.', 5) = ''
+				AND split_part(T .file_ver, '.', 4) != ''
+			) b
+		WHERE
+			b.versions = (
+				SELECT
+					MAX (C .versions)
+				FROM
+					(
+						SELECT
+							to_number(
+								(
+									LPAD(
+										split_part(T .file_ver, '.', 2),
+										3,
+										'0'
+									) || LPAD(
+										split_part(T .file_ver, '.', 3),
+										3,
+										'0'
+									) || LPAD(
+										split_part(T .file_ver, '.', 4),
+										5,
+										'0'
+									)
+								),
+								'9999999999999999999'
+							) versions,
+							T .*
+						FROM
+							tmp_device_upgrade_file T
+						WHERE
+							split_part(T .file_ver, '.', 5) = ''
+						AND split_part(T .file_ver, '.', 4) != ''
+					) C
+				WHERE
+					C .company_id = b.company_id
+				AND b.device_type_id = C .device_type_id
+				AND C .is_delete = 0
+			)
+  </select>
+  
+  
+  <select id="getDeviceListByUpgradeID"  parameterType="java.lang.Integer"  resultType="java.lang.String">
+		  SELECT
+			T .tmp_device_id
+		FROM
+			tmp_device_tmp_device_upgrade_file_rel T
+		WHERE
+			T .tmp_device_upgrade_file_id = #{id,jdbcType=INTEGER} 
+  </select>
+  
+  
+   <select id="getBlackListVersion"  parameterType="Map"  resultMap="BlacklistVersionResultMap">
+					SELECT
+			b.*
+		FROM
+			(
+				SELECT
+					to_number(
+						(
+							LPAD(
+								split_part(T . NAME, '.', 2),
+								3,
+								'0'
+							) || LPAD(
+								split_part(T . NAME, '.', 3),
+								3,
+								'0'
+							) || LPAD(
+								split_part(T . NAME, '.', 4),
+								5,
+								'0'
+							)
+						),
+						'9999999999999999999'
+					) versions,
+					T .*
+				FROM
+					tmp_device_blacklist_version_files T
+				WHERE
+					split_part(T . NAME, '.', 4) != ''
+				AND split_part(T . NAME, '.', 5) != ''
+			) b
+		WHERE
+			b.versions = (
+				SELECT
+					MAX (C .versions)
+				FROM
+					(
+						SELECT
+							to_number(
+								(
+									LPAD(
+										split_part(T . NAME, '.', 2),
+										3,
+										'0'
+									) || LPAD(
+										split_part(T . NAME, '.', 3),
+										3,
+										'0'
+									) || LPAD(
+										split_part(T . NAME, '.', 4),
+										5,
+										'0'
+									)
+								),
+								'9999999999999999999'
+							) versions,
+							T .*
+						FROM
+							tmp_device_blacklist_version_files T
+						WHERE
+							split_part(T . NAME, '.', 4) != ''
+						AND split_part(T . NAME, '.', 5) != ''
+						AND T .is_delete = 0
+					) C
+				WHERE
+					C .company_id = b.company_id
+			)
+			
+  </select>
+
+
+</mapper>

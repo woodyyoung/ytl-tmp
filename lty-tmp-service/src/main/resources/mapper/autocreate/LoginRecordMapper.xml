@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.tmp.service.mapper.LoginRecordMapper">
+  <resultMap id="BaseResultMap" type="com.lty.tmp.service.bean.entity.autocreate.LoginRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="reset_counts_moved0" jdbcType="VARCHAR" property="resetCountsMoved0" />
+    <result column="dev_id_moved0" jdbcType="VARCHAR" property="devIdMoved0" />
+    <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
+    <result column="disc_reason_moved0" jdbcType="VARCHAR" property="discReasonMoved0" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="sim_sn" jdbcType="VARCHAR" property="simSn" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="line_id_moved0" jdbcType="VARCHAR" property="lineIdMoved0" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="time" jdbcType="DATE" property="time" />
+    <result column="dev_sn" jdbcType="VARCHAR" property="devSn" />
+    <result column="conn_counts_moved0" jdbcType="VARCHAR" property="connCountsMoved0" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="enable_tbp_moved0" jdbcType="VARCHAR" property="enableTbpMoved0" />
+    <result column="dev_model" jdbcType="VARCHAR" property="devModel" />
+    <result column="reset_counts" jdbcType="INTEGER" property="resetCounts" />
+    <result column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="disc_reason" jdbcType="INTEGER" property="discReason" />
+    <result column="enable_tbp" jdbcType="INTEGER" property="enableTbp" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="conn_counts" jdbcType="INTEGER" property="connCounts" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, reset_counts_moved0, dev_id_moved0, company_code, disc_reason_moved0, create_uid, 
+    sim_sn, write_uid, line_id_moved0, create_date, write_date, time, dev_sn, conn_counts_moved0, 
+    city_code, enable_tbp_moved0, dev_model, reset_counts, dev_id, disc_reason, enable_tbp, 
+    line_id, conn_counts
+  </sql>
+  <select id="selectByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LoginRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tmp_report_login_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tmp_report_login_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tmp_report_login_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LoginRecordExample">
+    delete from tmp_report_login_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lty.tmp.service.bean.entity.autocreate.LoginRecord">
+    insert into tmp_report_login_record (id, reset_counts_moved0, dev_id_moved0, 
+      company_code, disc_reason_moved0, create_uid, 
+      sim_sn, write_uid, line_id_moved0, 
+      create_date, write_date, time, 
+      dev_sn, conn_counts_moved0, city_code, 
+      enable_tbp_moved0, dev_model, reset_counts, 
+      dev_id, disc_reason, enable_tbp, 
+      line_id, conn_counts)
+    values (#{id,jdbcType=INTEGER}, #{resetCountsMoved0,jdbcType=VARCHAR}, #{devIdMoved0,jdbcType=VARCHAR}, 
+      #{companyCode,jdbcType=VARCHAR}, #{discReasonMoved0,jdbcType=VARCHAR}, #{createUid,jdbcType=INTEGER}, 
+      #{simSn,jdbcType=VARCHAR}, #{writeUid,jdbcType=INTEGER}, #{lineIdMoved0,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{writeDate,jdbcType=TIMESTAMP}, #{time,jdbcType=DATE}, 
+      #{devSn,jdbcType=VARCHAR}, #{connCountsMoved0,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{enableTbpMoved0,jdbcType=VARCHAR}, #{devModel,jdbcType=VARCHAR}, #{resetCounts,jdbcType=INTEGER}, 
+      #{devId,jdbcType=INTEGER}, #{discReason,jdbcType=INTEGER}, #{enableTbp,jdbcType=INTEGER}, 
+      #{lineId,jdbcType=INTEGER}, #{connCounts,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.LoginRecord">
+    insert into tmp_report_login_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="resetCountsMoved0 != null">
+        reset_counts_moved0,
+      </if>
+      <if test="devIdMoved0 != null">
+        dev_id_moved0,
+      </if>
+      <if test="companyCode != null">
+        company_code,
+      </if>
+      <if test="discReasonMoved0 != null">
+        disc_reason_moved0,
+      </if>
+      <if test="createUid != null">
+        create_uid,
+      </if>
+      <if test="simSn != null">
+        sim_sn,
+      </if>
+      <if test="writeUid != null">
+        write_uid,
+      </if>
+      <if test="lineIdMoved0 != null">
+        line_id_moved0,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="writeDate != null">
+        write_date,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="devSn != null">
+        dev_sn,
+      </if>
+      <if test="connCountsMoved0 != null">
+        conn_counts_moved0,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="enableTbpMoved0 != null">
+        enable_tbp_moved0,
+      </if>
+      <if test="devModel != null">
+        dev_model,
+      </if>
+      <if test="resetCounts != null">
+        reset_counts,
+      </if>
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="discReason != null">
+        disc_reason,
+      </if>
+      <if test="enableTbp != null">
+        enable_tbp,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="connCounts != null">
+        conn_counts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resetCountsMoved0 != null">
+        #{resetCountsMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="devIdMoved0 != null">
+        #{devIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="discReasonMoved0 != null">
+        #{discReasonMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="createUid != null">
+        #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="simSn != null">
+        #{simSn,jdbcType=VARCHAR},
+      </if>
+      <if test="writeUid != null">
+        #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="lineIdMoved0 != null">
+        #{lineIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeDate != null">
+        #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="devSn != null">
+        #{devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="connCountsMoved0 != null">
+        #{connCountsMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enableTbpMoved0 != null">
+        #{enableTbpMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="devModel != null">
+        #{devModel,jdbcType=VARCHAR},
+      </if>
+      <if test="resetCounts != null">
+        #{resetCounts,jdbcType=INTEGER},
+      </if>
+      <if test="devId != null">
+        #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="discReason != null">
+        #{discReason,jdbcType=INTEGER},
+      </if>
+      <if test="enableTbp != null">
+        #{enableTbp,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="connCounts != null">
+        #{connCounts,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LoginRecordExample" resultType="java.lang.Long">
+    select count(*) from tmp_report_login_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tmp_report_login_record
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.resetCountsMoved0 != null">
+        reset_counts_moved0 = #{record.resetCountsMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devIdMoved0 != null">
+        dev_id_moved0 = #{record.devIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyCode != null">
+        company_code = #{record.companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discReasonMoved0 != null">
+        disc_reason_moved0 = #{record.discReasonMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUid != null">
+        create_uid = #{record.createUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.simSn != null">
+        sim_sn = #{record.simSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeUid != null">
+        write_uid = #{record.writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineIdMoved0 != null">
+        line_id_moved0 = #{record.lineIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.writeDate != null">
+        write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=DATE},
+      </if>
+      <if test="record.devSn != null">
+        dev_sn = #{record.devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.connCountsMoved0 != null">
+        conn_counts_moved0 = #{record.connCountsMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        city_code = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enableTbpMoved0 != null">
+        enable_tbp_moved0 = #{record.enableTbpMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devModel != null">
+        dev_model = #{record.devModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resetCounts != null">
+        reset_counts = #{record.resetCounts,jdbcType=INTEGER},
+      </if>
+      <if test="record.devId != null">
+        dev_id = #{record.devId,jdbcType=INTEGER},
+      </if>
+      <if test="record.discReason != null">
+        disc_reason = #{record.discReason,jdbcType=INTEGER},
+      </if>
+      <if test="record.enableTbp != null">
+        enable_tbp = #{record.enableTbp,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.connCounts != null">
+        conn_counts = #{record.connCounts,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tmp_report_login_record
+    set id = #{record.id,jdbcType=INTEGER},
+      reset_counts_moved0 = #{record.resetCountsMoved0,jdbcType=VARCHAR},
+      dev_id_moved0 = #{record.devIdMoved0,jdbcType=VARCHAR},
+      company_code = #{record.companyCode,jdbcType=VARCHAR},
+      disc_reason_moved0 = #{record.discReasonMoved0,jdbcType=VARCHAR},
+      create_uid = #{record.createUid,jdbcType=INTEGER},
+      sim_sn = #{record.simSn,jdbcType=VARCHAR},
+      write_uid = #{record.writeUid,jdbcType=INTEGER},
+      line_id_moved0 = #{record.lineIdMoved0,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      time = #{record.time,jdbcType=DATE},
+      dev_sn = #{record.devSn,jdbcType=VARCHAR},
+      conn_counts_moved0 = #{record.connCountsMoved0,jdbcType=VARCHAR},
+      city_code = #{record.cityCode,jdbcType=VARCHAR},
+      enable_tbp_moved0 = #{record.enableTbpMoved0,jdbcType=VARCHAR},
+      dev_model = #{record.devModel,jdbcType=VARCHAR},
+      reset_counts = #{record.resetCounts,jdbcType=INTEGER},
+      dev_id = #{record.devId,jdbcType=INTEGER},
+      disc_reason = #{record.discReason,jdbcType=INTEGER},
+      enable_tbp = #{record.enableTbp,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      conn_counts = #{record.connCounts,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.LoginRecord">
+    update tmp_report_login_record
+    <set>
+      <if test="resetCountsMoved0 != null">
+        reset_counts_moved0 = #{resetCountsMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="devIdMoved0 != null">
+        dev_id_moved0 = #{devIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="discReasonMoved0 != null">
+        disc_reason_moved0 = #{discReasonMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="createUid != null">
+        create_uid = #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="simSn != null">
+        sim_sn = #{simSn,jdbcType=VARCHAR},
+      </if>
+      <if test="writeUid != null">
+        write_uid = #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="lineIdMoved0 != null">
+        line_id_moved0 = #{lineIdMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeDate != null">
+        write_date = #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=DATE},
+      </if>
+      <if test="devSn != null">
+        dev_sn = #{devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="connCountsMoved0 != null">
+        conn_counts_moved0 = #{connCountsMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enableTbpMoved0 != null">
+        enable_tbp_moved0 = #{enableTbpMoved0,jdbcType=VARCHAR},
+      </if>
+      <if test="devModel != null">
+        dev_model = #{devModel,jdbcType=VARCHAR},
+      </if>
+      <if test="resetCounts != null">
+        reset_counts = #{resetCounts,jdbcType=INTEGER},
+      </if>
+      <if test="devId != null">
+        dev_id = #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="discReason != null">
+        disc_reason = #{discReason,jdbcType=INTEGER},
+      </if>
+      <if test="enableTbp != null">
+        enable_tbp = #{enableTbp,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="connCounts != null">
+        conn_counts = #{connCounts,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lty.tmp.service.bean.entity.autocreate.LoginRecord">
+    update tmp_report_login_record
+    set reset_counts_moved0 = #{resetCountsMoved0,jdbcType=VARCHAR},
+      dev_id_moved0 = #{devIdMoved0,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      disc_reason_moved0 = #{discReasonMoved0,jdbcType=VARCHAR},
+      create_uid = #{createUid,jdbcType=INTEGER},
+      sim_sn = #{simSn,jdbcType=VARCHAR},
+      write_uid = #{writeUid,jdbcType=INTEGER},
+      line_id_moved0 = #{lineIdMoved0,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      write_date = #{writeDate,jdbcType=TIMESTAMP},
+      time = #{time,jdbcType=DATE},
+      dev_sn = #{devSn,jdbcType=VARCHAR},
+      conn_counts_moved0 = #{connCountsMoved0,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      enable_tbp_moved0 = #{enableTbpMoved0,jdbcType=VARCHAR},
+      dev_model = #{devModel,jdbcType=VARCHAR},
+      reset_counts = #{resetCounts,jdbcType=INTEGER},
+      dev_id = #{devId,jdbcType=INTEGER},
+      disc_reason = #{discReason,jdbcType=INTEGER},
+      enable_tbp = #{enableTbp,jdbcType=INTEGER},
+      line_id = #{lineId,jdbcType=INTEGER},
+      conn_counts = #{connCounts,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

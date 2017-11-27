@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+    	<property name="javaFileEncoding" value="UTF-8"/>
+		<!-- Pagination -->  
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		  
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="org.postgresql.Driver" connectionURL="jdbc:postgresql://10.1.254.125:5432/hgx"
+                        userId="odoo" password="odoo">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="com.lty.tmp.service.bean.entity.autocreate" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="autocreate" targetProject="src/main/resources/mapper">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--生成Dao类存放位置-->
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lty.tmp.service.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--生成对应表及类名-->
+       <!--  <table tableName="tmp_line" domainObjectName="Line" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+               
+        <table tableName="tmp_sys_settings_city" domainObjectName="City" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+         <table tableName="res_company" domainObjectName="Company" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+        
+        <table tableName="tmp_device" domainObjectName="Device" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+        <table tableName="tmp_line_release_version" domainObjectName="LineVersion" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+        
+        <table tableName="tmp_device_hardware_status" domainObjectName="DeviceHardware" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+        <table tableName="tmp_device_software_status" domainObjectName="DeviceSoftware" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+        <table tableName="tmp_device_factory_out" domainObjectName="DeviceFactoryOut" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+        <table tableName="tmp_report_login_record" domainObjectName="LoginRecord" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+         
+         <table tableName="tmp_report_login_noexistent" domainObjectName="LoginnoexistRecord" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+    
+    	<table tableName="tmp_device_log_upload" domainObjectName="DeviceUploadLog" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+        
+        <table tableName="tmp_report_upgrade_record" domainObjectName="upgradeLog" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> -->
+        
+       <!--  <table tableName="tmp_report_upgrade_detail" domainObjectName="UpgradeDetail" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> -->
+         
+          
+       <!--  <table tableName="tmp_device_blacklist_version_files" domainObjectName="BlackListVersion" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>   -->
+  
+   		<!-- <table tableName="tmp_device_type" domainObjectName="DeviceType" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
+        <table tableName="ir_config_parameter" domainObjectName="ParamConfig" enableCountByExample="true" enableUpdateByExample="true"
+        enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> -->
+        
+
+    </context>
+</generatorConfiguration>

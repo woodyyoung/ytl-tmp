@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.tmp.service.mapper.LineVersionMapper">
+  <resultMap id="BaseResultMap" type="com.lty.tmp.service.bean.entity.autocreate.LineVersion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_uid" jdbcType="INTEGER" property="createUid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="write_date" jdbcType="TIMESTAMP" property="writeDate" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="xml_type" jdbcType="VARCHAR" property="xmlType" />
+    <result column="sub_version" jdbcType="VARCHAR" property="subVersion" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="main_version" jdbcType="VARCHAR" property="mainVersion" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="write_uid" jdbcType="INTEGER" property="writeUid" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, create_uid, remark, write_date, city_id, file_name, company_id, xml_type, sub_version, 
+    line_id, main_version, version, device_type, create_date, write_uid, file_path
+  </sql>
+  <select id="selectByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineVersionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tmp_line_release_version
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tmp_line_release_version
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tmp_line_release_version
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineVersionExample">
+    delete from tmp_line_release_version
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineVersion">
+    insert into tmp_line_release_version (id, create_uid, remark, 
+      write_date, city_id, file_name, 
+      company_id, xml_type, sub_version, 
+      line_id, main_version, version, 
+      device_type, create_date, write_uid, 
+      file_path)
+    values (#{id,jdbcType=INTEGER}, #{createUid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{writeDate,jdbcType=TIMESTAMP}, #{cityId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=INTEGER}, #{xmlType,jdbcType=VARCHAR}, #{subVersion,jdbcType=VARCHAR}, 
+      #{lineId,jdbcType=INTEGER}, #{mainVersion,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{deviceType,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{writeUid,jdbcType=INTEGER}, 
+      #{filePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineVersion">
+    insert into tmp_line_release_version
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createUid != null">
+        create_uid,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="writeDate != null">
+        write_date,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="xmlType != null">
+        xml_type,
+      </if>
+      <if test="subVersion != null">
+        sub_version,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="mainVersion != null">
+        main_version,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="writeUid != null">
+        write_uid,
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createUid != null">
+        #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="writeDate != null">
+        #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="xmlType != null">
+        #{xmlType,jdbcType=VARCHAR},
+      </if>
+      <if test="subVersion != null">
+        #{subVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="mainVersion != null">
+        #{mainVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeUid != null">
+        #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineVersionExample" resultType="java.lang.Long">
+    select count(*) from tmp_line_release_version
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tmp_line_release_version
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUid != null">
+        create_uid = #{record.createUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeDate != null">
+        write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileName != null">
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.xmlType != null">
+        xml_type = #{record.xmlType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subVersion != null">
+        sub_version = #{record.subVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mainVersion != null">
+        main_version = #{record.mainVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceType != null">
+        device_type = #{record.deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.writeUid != null">
+        write_uid = #{record.writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.filePath != null">
+        file_path = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tmp_line_release_version
+    set id = #{record.id,jdbcType=INTEGER},
+      create_uid = #{record.createUid,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      write_date = #{record.writeDate,jdbcType=TIMESTAMP},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      xml_type = #{record.xmlType,jdbcType=VARCHAR},
+      sub_version = #{record.subVersion,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      main_version = #{record.mainVersion,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      device_type = #{record.deviceType,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      write_uid = #{record.writeUid,jdbcType=INTEGER},
+      file_path = #{record.filePath,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineVersion">
+    update tmp_line_release_version
+    <set>
+      <if test="createUid != null">
+        create_uid = #{createUid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="writeDate != null">
+        write_date = #{writeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="xmlType != null">
+        xml_type = #{xmlType,jdbcType=VARCHAR},
+      </if>
+      <if test="subVersion != null">
+        sub_version = #{subVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="mainVersion != null">
+        main_version = #{mainVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeUid != null">
+        write_uid = #{writeUid,jdbcType=INTEGER},
+      </if>
+      <if test="filePath != null">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lty.tmp.service.bean.entity.autocreate.LineVersion">
+    update tmp_line_release_version
+    set create_uid = #{createUid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      write_date = #{writeDate,jdbcType=TIMESTAMP},
+      city_id = #{cityId,jdbcType=INTEGER},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER},
+      xml_type = #{xmlType,jdbcType=VARCHAR},
+      sub_version = #{subVersion,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=INTEGER},
+      main_version = #{mainVersion,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      write_uid = #{writeUid,jdbcType=INTEGER},
+      file_path = #{filePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
